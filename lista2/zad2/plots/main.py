@@ -12,12 +12,24 @@ quick_100 = []
 hybrid_1 = []
 hybrid_10 = []
 hybrid_100 = []
+kmerge_1 = []
+kmerge_10 = []
+kmerge_100 = []
+dual_quick_1 = []
+dual_quick_10 = []
+dual_quick_100 = []
 quick_1_long = []
 quick_10_long = []
 quick_100_long = []
 hybrid_1_long = []
 hybrid_10_long = []
 hybrid_100_long = []
+kmerge_1_long = []
+kmerge_10_long = []
+kmerge_100_long = []
+dual_quick_1_long = []
+dual_quick_10_long = []
+dual_quick_100_long = []
 
 
 class Read:
@@ -90,7 +102,7 @@ class Plot:
             plt.scatter(line[0], line[col_to_parse], s=6, c='b')
 
         for line in source_4:
-            plt.scatter(line[0], line[col_to_parse], s=6, c='p')
+            plt.scatter(line[0], line[col_to_parse], s=6, c='y')
 
         plt.xlim(left=0)
         plt.ylim(bottom=0)
@@ -116,31 +128,41 @@ Read.read_csv(quick_100_long, 'quick_k=100_long')
 Read.read_csv(hybrid_1_long, 'quick_hybrid_k=1_long')
 Read.read_csv(hybrid_10_long, 'quick_hybrid_k=10_long')
 Read.read_csv(hybrid_100_long, 'quick_hybrid_k=100_long')
+Read.read_csv(kmerge_1, 'kmerge_k=1')
+Read.read_csv(kmerge_10, 'kmerge_k=10')
+Read.read_csv(kmerge_100, 'kmerge_k=100')
+Read.read_csv(kmerge_1_long, 'kmerge_k=1_long')
+Read.read_csv(kmerge_10_long, 'kmerge_k=10_long')
+Read.read_csv(kmerge_100_long, 'kmerge_k=100_long')
+Read.read_csv(dual_quick_1, 'dual_pivot_k=1')
+Read.read_csv(dual_quick_10, 'dual_pivot_k=10')
+Read.read_csv(dual_quick_100, 'dual_pivot_k=100')
+Read.read_csv(dual_quick_1_long, 'dual_pivot_k=1_long')
+Read.read_csv(dual_quick_10_long, 'dual_pivot_k=10_long')
+Read.read_csv(dual_quick_100_long, 'dual_pivot_k=100_long')
 
-# Plot.plot_3(insertion_1, quick_1, hybrid_1, 1, 'plots/c_1.png')
-# Plot.plot_3(insertion_10, quick_10, hybrid_10, 1, 'plots/c_10.png')
-# Plot.plot_3(insertion_100, quick_100, hybrid_100, 1, 'plots/c_100.png')
-# Plot.plot_3(insertion_1, quick_1, hybrid_1, 2, 'plots/s_1.png')
-# Plot.plot_3(insertion_10, quick_10, hybrid_10, 2, 'plots/s_10.png')
-# Plot.plot_3(insertion_100, quick_100, hybrid_100, 2, 'plots/s_100.png')
-# Plot.plot_3(insertion_1, quick_1, hybrid_1, 3, 'plots/c_n_1.png')
-# Plot.plot_3(insertion_10, quick_10, hybrid_10, 3, 'plots/c_n_10.png')
-# Plot.plot_3(insertion_100, quick_100, hybrid_100, 3, 'plots/c_n_100.png')
-# Plot.plot_3(insertion_1, quick_1, hybrid_1, 4, 'plots/s_n_1.png')
-# Plot.plot_3(insertion_10, quick_10, hybrid_10, 4, 'plots/s_n_10.png')
-# Plot.plot_3(insertion_100, quick_100, hybrid_100, 4, 'plots/s_n_100.png')
-#
-# Plot.plot_2(quick_1_long, hybrid_1_long, 1, 'plots/c_1_long.png')
-# Plot.plot_2(quick_10_long, hybrid_10_long, 1, 'plots/c_10_long.png')
-# Plot.plot_2(quick_100_long, hybrid_100_long, 1, 'plots/c_100_long.png')
-# Plot.plot_2(quick_1_long, hybrid_1_long, 2, 'plots/s_1_long.png')
-# Plot.plot_2(quick_10_long, hybrid_10_long, 2, 'plots/s_10_long.png')
-# Plot.plot_2(quick_100_long, hybrid_100_long, 2, 'plots/s_100_long.png')
-# Plot.plot_2(quick_1_long, hybrid_1_long, 3, 'plots/c_n_1_long.png')
-# Plot.plot_2(quick_10_long, hybrid_10_long, 3, 'plots/c_n_10_long.png')
-# Plot.plot_2(quick_100_long, hybrid_100_long, 3, 'plots/c_n_100_long.png')
-# Plot.plot_2(quick_1_long, hybrid_1_long, 3, 'plots/s_n_1_long.png')
-# Plot.plot_2(quick_10_long, hybrid_10_long, 3, 'plots/s_n_10_long.png')
-# Plot.plot_2(quick_100_long, hybrid_100_long, 3, 'plots/s_n_100_long.png')
+Plot.plot_4(insertion_1, quick_1, hybrid_1, dual_quick_1, 1, 'plots/c_1.png')
+Plot.plot_4(insertion_10, quick_10, hybrid_10, dual_quick_10, 1, 'plots/c_1.png')
+Plot.plot_4(insertion_100, quick_100, hybrid_100, dual_quick_100, 1, 'plots/c_1.png')
+Plot.plot_4(insertion_1, quick_1, hybrid_1, dual_quick_1, 2, 'plots/s_1.png')
+Plot.plot_4(insertion_10, quick_10, hybrid_10,dual_quick_10, 2, 'plots/s_10.png')
+Plot.plot_4(insertion_100, quick_100, hybrid_100,dual_quick_100, 2, 'plots/s_100.png')
+Plot.plot_4(insertion_1, quick_1, hybrid_1,dual_quick_1, 3, 'plots/c_n_1.png')
+Plot.plot_4(insertion_10, quick_10, hybrid_10,dual_quick_10, 3, 'plots/c_n_10.png')
+Plot.plot_4(insertion_100, quick_100, hybrid_100,dual_quick_100, 3, 'plots/c_n_100.png')
+Plot.plot_4(insertion_1, quick_1, hybrid_1,dual_quick_1, 4, 'plots/s_n_1.png')
+Plot.plot_4(insertion_10, quick_10, hybrid_10,dual_quick_10, 4, 'plots/s_n_10.png')
+Plot.plot_4(insertion_100, quick_100, hybrid_100,dual_quick_100, 4, 'plots/s_n_100.png')
 
-Plot.plot_4()
+Plot.plot_3(quick_1_long, hybrid_1_long, dual_quick_1_long,1, 'plots/c_1_long.png')
+Plot.plot_3(quick_10_long, hybrid_10_long, dual_quick_10_long,1, 'plots/c_10_long.png')
+Plot.plot_3(quick_100_long, hybrid_100_long,dual_quick_100_long, 1, 'plots/c_100_long.png')
+Plot.plot_3(quick_1_long, hybrid_1_long, dual_quick_1_long,3, 'plots/s_1_long.png')
+Plot.plot_3(quick_10_long, hybrid_10_long, dual_quick_10_long,3, 'plots/s_10_long.png')
+Plot.plot_3(quick_100_long, hybrid_100_long, dual_quick_100_long,3, 'plots/s_100_long.png')
+Plot.plot_3(quick_1_long, hybrid_1_long,dual_quick_1_long, 3, 'plots/c_n_1_long.png')
+Plot.plot_3(quick_10_long, hybrid_10_long,dual_quick_10_long, 3, 'plots/c_n_10_long.png')
+Plot.plot_3(quick_100_long, hybrid_100_long, dual_quick_100_long,3, 'plots/c_n_100_long.png')
+Plot.plot_3(quick_1_long, hybrid_1_long,dual_quick_1_long, 3, 'plots/s_n_1_long.png')
+Plot.plot_3(quick_10_long, hybrid_10_long, dual_quick_10_long,3, 'plots/s_n_10_long.png')
+Plot.plot_3(quick_100_long, hybrid_100_long,dual_quick_100_long, 3, 'plots/s_n_100_long.png')

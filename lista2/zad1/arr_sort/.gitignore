@@ -1,4 +1,0 @@
-*.out
-.clang-format
-cmake-build-debug/
-.idea/

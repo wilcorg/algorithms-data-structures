@@ -49,6 +49,10 @@ Task arg_parse(int32_t argc, char *argv[]) {
             task.strategy = QUICK;
         } else if (strategy == "quick_hybrid") {
             task.strategy = QUICK_HYBRID;
+        } else if (strategy == "kmerge") {
+            task.strategy = KMERGE;
+        } else if (strategy == "dual_pivot") {
+            task.strategy = DUAL_QUICK;
         } else {
             throw boost::bad_any_cast();
         }

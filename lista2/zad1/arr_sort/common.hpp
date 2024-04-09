@@ -9,7 +9,7 @@
 #include <boost/program_options.hpp>
 
 enum SortStrategy {
-    INSERTION, QUICK, QUICK_HYBRID
+    INSERTION, QUICK, QUICK_HYBRID, KMERGE, DUAL_QUICK
 };
 
 typedef struct {

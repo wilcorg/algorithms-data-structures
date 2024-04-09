@@ -36,7 +36,7 @@ do
     ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy quick --k $k >> dataset/quick_k=$k
     ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy quick_hybrid --k $k >> dataset/quick_hybrid_k=$k
      ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy kmerge --k $k >> dataset/kmerge_k="$k"
-#    ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy dual_pivot --k $k >> dataset/dual_pivot_k="$k"
+    ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy dual_pivot --k $k >> dataset/dual_pivot_k="$k"
   done
 done
 
@@ -47,6 +47,6 @@ do
     ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy quick --k $k >> dataset/quick_k="$k"_long
     ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy quick_hybrid --k $k >> dataset/quick_hybrid_k="$k"_long
      ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy kmerge --k $k >> dataset/kmerge_k="$k"_long
-#    ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy dual_pivot --k $k >> dataset/dual_pivot_k="$k"_long
+    ./bin/benchmark --mode rand --count $i --high $((2 * i - 1)) --strategy dual_pivot --k $k >> dataset/dual_pivot_k="$k"_long
   done
 done

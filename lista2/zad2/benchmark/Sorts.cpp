@@ -246,3 +246,63 @@ std::pair<int32_t, int32_t> Sorts::dual_qs_partition(std::vector<int32_t> &array
 
     return pivot;
 }
+
+void Sorts::merge_sort(std::vector<int32_t> &array, SortMetric &metric) {
+    merge_sort_impl(array, 0, array.size() - 1, metric);
+}
+
+void Sorts::merge(std::vector<int32_t> &array, int32_t left, int32_t mid, int32_t right, SortMetric &metric) {
+    std::vector<int> leftArray;
+    std::vector<int> rightArray;
+
+    int subarrayL = mid - left + 1;
+    int subarrayR = right - mid;
+
+    for (int i = 0; i < subarrayL; i++) {
+        metric.swap_count += 1;
+        leftArray.push_back(array[left + i]);
+    }
+    for (int j = 0; j < subarrayR; j++) {
+        metric.swap_count += 1;
+        leftArray.push_back(array[mid + 1 + j]);
+    }
+
+    int li = 0, ri = 0;
+    int merged_i = left;
+
+    while (li < subarrayL && ri < subarrayR) {
+        metric.comparison_count += 1;
+        if (leftArray[li] <= rightArray[ri]) {
+            metric.swap_count += 1;
+            array[merged_i] = leftArray[li];
+            li++;
+        } else {
+            metric.swap_count += 1;
+            array[merged_i] = rightArray[ri];
+            ri++;
+        }
+        merged_i++;
+    }
+
+    while (li < subarrayL) {
+        metric.swap_count += 1;
+        array[merged_i] = leftArray[li];
+        li++;
+        merged_i++;
+    }
+    while (ri < subarrayR) {
+        metric.swap_count += 1;
+        array[merged_i] = rightArray[ri];
+        ri++;
+        merged_i++;
+    }
+}
+
+void Sorts::merge_sort_impl(std::vector<int32_t> &array, int32_t p, int32_t r, SortMetric &metric) {
+    if (p >= r) return;
+
+    int32_t mid = (p + r) / 2;
+    merge_sort_impl(array, p, mid, metric);
+    merge_sort_impl(array, mid + 1, r, metric);
+    merge(array, p, mid, r, metric);
+}
