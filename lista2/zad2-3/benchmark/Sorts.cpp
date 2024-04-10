@@ -2,7 +2,6 @@
 
 void Sorts::insertion_sort(std::vector<int32_t> &array, int32_t p, int32_t r, SortMetric &metric) {
     for (int32_t i = p + 1; i < r + 1; i++) {
-        arr_print(array);
 
         // element to insert into left hand
         int32_t key = array[i];
@@ -53,7 +52,6 @@ int32_t Sorts::qs_partition(std::vector<int32_t> &array, int32_t p, int32_t r, S
 void Sorts::quick_sort_impl(std::vector<int32_t> &array, int32_t p, int32_t r, SortMetric &metric) {
     if (p < r) {
         int32_t q = qs_partition(array, p, r, metric);
-        arr_print(array);
         quick_sort_impl(array, p, q - 1, metric);
         quick_sort_impl(array, q + 1, r, metric);
     }
@@ -64,7 +62,6 @@ void Sorts::hybrid_quick_sort_impl(std::vector<int32_t> &array, int32_t p, int32
     if (p < r) {
         if (r - p > threshold) {
             int32_t q = qs_partition(array, p, r, metric);
-            arr_print(array);
             hybrid_quick_sort_impl(array, p, q - 1, metric, threshold);
             hybrid_quick_sort_impl(array, q + 1, r, metric, threshold);
         } else {
@@ -73,7 +70,7 @@ void Sorts::hybrid_quick_sort_impl(std::vector<int32_t> &array, int32_t p, int32
     }
 }
 
-SortMetric Sorts::arr_sort(Task &task) {
+SortMetric Sorts::arr_sort(SortTask &task) {
     SortMetric metric{.n = task.count.value()};
 
     if (task.strategy == INSERTION) {
@@ -86,6 +83,8 @@ SortMetric Sorts::arr_sort(Task &task) {
         Sorts::kmerge_sort(task.input, metric);
     } else if (task.strategy == DUAL_QUICK) {
         Sorts::dual_quick_sort(task.input, metric);
+    } else if (task.strategy == MERGE) {
+        Sorts::merge_sort(task.input, metric);
     }
 
     for (int32_t i = 0; i < metric.n - 1; i++) {
@@ -189,7 +188,6 @@ void Sorts::dual_quick_sort(std::vector<int32_t> &array, SortMetric &metric) {
 void Sorts::dual_quick_sort_impl(std::vector<int32_t> &array, int32_t p, int32_t r, SortMetric &metric) {
     if (p < r) {
         auto pivot = dual_qs_partition(array, p, r, metric);
-        arr_print(array);
         dual_quick_sort_impl(array, p, pivot.first - 1, metric);
         dual_quick_sort_impl(array, pivot.first + 1, pivot.second - 1, metric);
         dual_quick_sort_impl(array, pivot.second + 1, r, metric);
@@ -239,4 +237,64 @@ std::pair<int32_t, int32_t> Sorts::dual_qs_partition(std::vector<int32_t> &array
     pivot.second = g;
 
     return pivot;
+}
+
+void Sorts::merge_sort(std::vector<int32_t> &array, SortMetric &metric) {
+    merge_sort_impl(array, 0, array.size() - 1, metric);
+}
+
+void Sorts::merge(std::vector<int32_t> &array, int32_t left, int32_t mid, int32_t right, SortMetric &metric) {
+    std::vector<int> leftArray;
+    std::vector<int> rightArray;
+
+    int subarrayL = mid - left + 1;
+    int subarrayR = right - mid;
+
+    for (int i = 0; i < subarrayL; i++) {
+        metric.swap_count += 1;
+        leftArray.push_back(array[left + i]);
+    }
+    for (int j = 0; j < subarrayR; j++) {
+        metric.swap_count += 1;
+        rightArray.push_back(array[mid + 1 + j]);
+    }
+
+    int li = 0, ri = 0;
+    int merged_i = left;
+
+    while (li < subarrayL && ri < subarrayR) {
+        if (metric.comparison_count++; leftArray[li] <= rightArray[ri]) {
+            metric.swap_count += 1;
+            array[merged_i] = leftArray[li];
+            li++;
+        } else {
+            metric.swap_count += 1;
+            array[merged_i] = rightArray[ri];
+            ri++;
+        }
+        merged_i++;
+    }
+
+    while (li < subarrayL) {
+        metric.swap_count += 1;
+        array[merged_i] = leftArray[li];
+        li++;
+        merged_i++;
+    }
+    while (ri < subarrayR) {
+        metric.swap_count += 1;
+        array[merged_i] = rightArray[ri];
+        ri++;
+        merged_i++;
+    }
+}
+
+void Sorts::merge_sort_impl(std::vector<int32_t> &array, int32_t p, int32_t r, SortMetric &metric) {
+    if (r > p) {
+
+        int32_t mid = (p + r) / 2;
+        merge_sort_impl(array, p, mid, metric);
+        merge_sort_impl(array, mid + 1, r, metric);
+        merge(array, p, mid, r, metric);
+    }
 }
