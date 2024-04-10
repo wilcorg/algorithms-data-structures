@@ -1,3 +1,0 @@
-/home/romka/pwr/aisd/l/2lista/1z/arr_sort/cmake-build-debug/CMakeFiles/arr_sort.dir
-/home/romka/pwr/aisd/l/2lista/1z/arr_sort/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/romka/pwr/aisd/l/2lista/1z/arr_sort/cmake-build-debug/CMakeFiles/rebuild_cache.dir
